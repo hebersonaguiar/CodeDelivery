@@ -1,0 +1,24 @@
+<div class="form-group">
+	<?php echo Form::label('Category', 'Categoria:'); ?>
+
+	<?php echo Form::select('category_id', $categories, null, ['class'=>'form-control']); ?>
+
+</div>
+<div class="form-group">
+	<?php echo Form::label('Name', 'Nome:'); ?>
+
+	<?php echo Form::text('name', null, ['class'=>'form-control']); ?>
+
+</div>
+<div class="form-group">
+	<?php echo Form::label('Description', 'Descrição:'); ?>
+
+	<?php echo Form::textarea('description', null, ['class'=>'form-control']); ?>
+
+</div>
+<div class="form-group">
+	<?php echo Form::label('Price', 'Preço:'); ?>
+
+	<?php echo Form::text('price', null, ['class'=>'form-control']); ?>
+
+</div>

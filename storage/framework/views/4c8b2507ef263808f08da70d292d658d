@@ -1,0 +1,59 @@
+<?php $__env->startSection('content'); ?>
+
+<div class="container">
+	<h3>Pedidos</h3>
+
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Total</th>
+				<th>Data</th>
+				<th>Itens</th>
+				<th>Entregador</th>
+				<th>Status</th>
+				<th>Ação</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach($orders as $order): ?>
+			<tr>
+				<td>#<?php echo e($order->id); ?></td>
+				<td>R$ <?php echo e($order->total); ?></td>
+				<td><?php echo e($order->created_at); ?></td>
+				<td>
+					<ul>
+						<?php foreach($order->items as $item): ?>
+							<li><?php echo e($item->product->name); ?></li>
+						<?php endforeach; ?>
+					</ul>
+				</td>
+				<td>
+					<?php if($order->deliveryman): ?>
+						<?php echo e($order->deliveryman->name); ?>
+
+					<?php else: ?>
+						--
+					<?php endif; ?>
+				</td>
+				<td>
+					<?php echo e($order->status); ?>
+
+				</td>
+				<td>
+						<a class="btn btn-default btn-sm" href="#">
+						Editar
+					</a>
+				</td>
+			</tr>
+			<?php endforeach; ?>
+		</tbody>
+	</table>
+
+	<?php echo $orders->render(); ?>
+
+
+</div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
