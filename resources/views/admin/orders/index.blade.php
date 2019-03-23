@@ -41,7 +41,7 @@
 					{{ $order->status }}
 				</td>
 				<td>
-						<a class="btn btn-default btn-sm" href="#">
+						<a class="btn btn-default btn-sm" href="{{ route('admin.orders.edit', ['id'=>$order->id]) }}">
 						Editar
 					</a>
 				</td>

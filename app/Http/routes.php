@@ -37,8 +37,17 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth.checkrole', 'as'=>'admin.']
 	Route::post('clients/store',['as'=>'clients.store','uses'=>'ClientsController@store']);
 
 	Route::get('orders',['as'=>'orders.index' ,'uses'=>'OrdersController@index']);
-	// Route::get('orders',['as'=>'orders.edit' ,'uses'=>'OrdersController@edit']);
+	Route::get('orders/{id}',['as'=>'orders.edit' ,'uses'=>'OrdersController@edit']);
+	Route::post('orders/update/{id}',['as'=>'orders.update','uses'=>'OrdersController@update']);
+
+	Route::get('cupoms',['as'=>'cupoms.index' ,'uses'=>'CupomsController@index']);
+	Route::get('cupoms/create',['as'=>'cupoms.create' ,'uses'=>'CupomsController@create']);
+	Route::post('cupoms/update/{id}',['as'=>'cupoms.update','uses'=>'CupomsController@update']);
+	Route::get('cupoms/{id}',['as'=>'cupoms.edit' ,'uses'=>'CupomsController@edit']);
+	Route::post('cupoms/store',['as'=>'cupoms.store','uses'=>'CupomsController@store']);
 });
 
 
-
+Route::group(['prefix'=>'customer', 'as'=>'customer.'], function() {
+	Route::get('order/create',['as'=>'order.create' ,'uses'=>'CheckoutController@create']);
+});

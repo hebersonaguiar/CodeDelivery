@@ -3,8 +3,7 @@
 namespace CodeDelivery\Http\Controllers;
 
 use CodeDelivery\Repositories\OrderRepository;
-use CodeDelivery\Repositories\ProductRepository;
-use CodeDelivery\Repositories\CategoryRepository;
+use CodeDelivery\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
 use CodeDelivery\Http\Requests\AdminProductRequest;
@@ -22,9 +21,7 @@ class OrdersController extends Controller
 
     public function index()
     {
-
     	$orders = $this->repository->paginate();
-
 
     	return view('admin.orders.index', compact('orders'));
     }
@@ -44,21 +41,22 @@ class OrdersController extends Controller
     // 	return redirect()->route('admin.orders.index');
     // }
 
-    // public function edit()
-    // {
-        // $product = $this->repository->find($id);
-        // $categories = $this->categoryRepository->lists('name','id');
+    public function edit($id, UserRepository $userRepository)
+    {
+        $list_status = [0=>'Psendente', 1=>'A caminho', 2=>'Entregue', 3=>'Cancelado'];
+        $order = $this->repository->find($id);
+        $deliveryman = $userRepository->getDeliveryman(['role'=>'deliveryman'], ['name','id']);
 
-        // return view('admin.orders.edit', compact('product','categories'));
-    // }
+        return view('admin.orders.edit', compact('order','list_status','deliveryman'));
+    }
 
-    // public function update(AdminProductRequest $request, $id)
-    // {
-    //     $data = $request->all();
-    //     $this->repository->update($data, $id);
+    public function update(Request $request, $id)
+    {
+        $all = $request->all();
+        $this->repository->update($all, $id);
 
-    //     return redirect()->route('admin.orders.index');
-    // }
+        return redirect()->route('admin.orders.index');
+    }
 
     // public function destroy($id)
     // {

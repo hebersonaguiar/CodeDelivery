@@ -3,16 +3,21 @@
 @section('content')
 
 <div class="container">
-	<h3>Editando Categoria: {{ $category->name }}</h3>
+	<h2>Pedido: #{{ $order->id }} - R$ {{ $order->total }}</h2>
+	<h3>Cliente: {{ $order->client->user->name }}</h3>
+	<h4>Data: {{ $order->created_at }}</h4>
 
-	@include('errors._check')
+	<p>
+		<b>Entregar em:</b> <br>
+		{{$order->client->address}} - {{$order->client->city}} - {{$order->client->state}}
+	</p>
+	<br>
+	{!! Form::model($order, ['route'=>['admin.orders.update', $order->id]]) !!}
 
-	{!! Form::model($category, ['route'=>['admin.categories.update', $category->id]]) !!}
-
-	@include('admin.categories._form')
+	@include('admin.orders._form')
 
 	<div class="form-group">
-		{!! Form::submit('Salvar Categoria', ['class'=>'btn btn-primary']) !!}
+		{!! Form::submit('Salvar', ['class'=>'btn btn-primary']) !!}
 	</div>
 
 	{!! Form::close() !!}

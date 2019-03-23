@@ -41,7 +41,7 @@
 
 				</td>
 				<td>
-						<a class="btn btn-default btn-sm" href="#">
+						<a class="btn btn-default btn-sm" href="<?php echo e(route('admin.orders.edit', ['id'=>$order->id])); ?>">
 						Editar
 					</a>
 				</td>
