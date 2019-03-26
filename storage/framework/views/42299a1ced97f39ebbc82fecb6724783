@@ -1,0 +1,12 @@
+<div class="form-group">
+	<?php echo Form::label('Status', 'Status:'); ?>
+
+	<?php echo Form::select('status', $list_status, null, ['class'=>'form-control']); ?>
+
+</div>
+<div class="form-group">
+	<?php echo Form::label('Entregador', 'Entregador:'); ?>
+
+	<?php echo Form::select('user_deliveryman_id', $deliveryman, null, ['class'=>'form-control']); ?>
+
+</div>

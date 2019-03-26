@@ -1,0 +1,30 @@
+<?php $__env->startSection('content'); ?>
+
+<div class="container">
+	<h2>Pedido: #<?php echo e($order->id); ?> - R$ <?php echo e($order->total); ?></h2>
+	<h3>Cliente: <?php echo e($order->client->user->name); ?></h3>
+	<h4>Data: <?php echo e($order->created_at); ?></h4>
+
+	<p>
+		<b>Entregar em:</b> <br>
+		<?php echo e($order->client->address); ?> - <?php echo e($order->client->city); ?> - <?php echo e($order->client->state); ?>
+
+	</p>
+	<br>
+	<?php echo Form::model($order, ['route'=>['admin.orders.update', $order->id]]); ?>
+
+
+	<?php echo $__env->make('admin.orders._form', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+	<div class="form-group">
+		<?php echo Form::submit('Salvar', ['class'=>'btn btn-primary']); ?>
+
+	</div>
+
+	<?php echo Form::close(); ?>
+
+
+</div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,41 @@
+<?php $__env->startSection('content'); ?>
+
+<div class="container">
+	<h3>Cupons</h3>
+
+	<a href="<?php echo e(route('admin.cupoms.create')); ?>" class="btn btn-default">Novo Cupom</a>
+
+	<br><br>
+
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Código</th>
+				<th>Valor</th>
+				<th>Ação</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach($cupoms as $cupom): ?>
+			<tr>
+				<td><?php echo e($cupom->id); ?></td>
+				<td><?php echo e($cupom->code); ?></td>
+				<td><?php echo e($cupom->value); ?></td>
+				<td>
+					<a class="btn btn-default btn-sm" href="<?php echo e(route('admin.cupoms.edit', ['id'=>$cupom->id])); ?>">
+						Editar
+					</a>
+				</td>
+			</tr>
+			<?php endforeach; ?>
+		</tbody>
+	</table>
+
+	<?php echo $cupoms->render(); ?>
+
+
+</div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

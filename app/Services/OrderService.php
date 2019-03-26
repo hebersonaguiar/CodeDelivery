@@ -5,6 +5,7 @@ namespace CodeDelivery\Services;
 use CodeDelivery\Repositories\OrderRepository;
 use CodeDelivery\Repositories\CupomRepository;
 use CodeDelivery\Repositories\ProductRepository;
+use Illuminate\Support\Facades\DB;
 
 class OrderService
 {
@@ -50,7 +51,7 @@ class OrderService
 
 			foreach ($items as $item ) {
 				$item['price'] = $this->productRepository->find($item['product_id'])->price;
-				$order->items->create($item);
+				$order->items()->create($item);
 				$total += $item['price'] * $item['qtd'];
 			}
 

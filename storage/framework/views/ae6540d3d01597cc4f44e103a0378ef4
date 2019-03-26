@@ -1,14 +1,13 @@
-@extends('app')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 <div class="container">
 	<h3>Novo Pedido</h3>
 
-	@include('errors._check')
+	<?php echo $__env->make('errors._check', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 	<div class="container">
-		{!! Form::open(['route'=>'customer.order.store', 'class'=>'form']) !!}
+		<?php echo Form::open(['route'=>'customer.order.store', 'class'=>'form']); ?>
+
 		<div class="form-group">
 			<label>Total: </label>
 			<p id="total"></p>
@@ -25,13 +24,14 @@
 					<tr>
 						<td>
 							<select class="form-control" name="items[0][product_id]">
-								@foreach($products as $p)
-									<option value="{{ $p->id }}" data-price="{{ $p->price }}">{{ $p->name }} --- {{ $p->price }}</option>
-								@endforeach
+								<?php foreach($products as $p): ?>
+									<option value="<?php echo e($p->id); ?>" data-price="<?php echo e($p->price); ?>"><?php echo e($p->name); ?> --- <?php echo e($p->price); ?></option>
+								<?php endforeach; ?>
 							</select>
 						</td>
 						<td>
-							{!! Form::text('items[0][qtd]', 1 , ['class'=>'form-control'])  !!}
+							<?php echo Form::text('items[0][qtd]', 1 , ['class'=>'form-control']); ?>
+
 						</td>
 					</tr>
 				</tbody>
@@ -39,15 +39,17 @@
 		</div>
 
 		<div class="form-group">
-			{!! Form::submit('Criar Pedido', ['class'=>'btn btn-primary'])  !!}
+			<?php echo Form::submit('Criar Pedido', ['class'=>'btn btn-primary']); ?>
+
 		</div>
-		{!! Form::close() !!}
+		<?php echo Form::close(); ?>
+
 	</div>
 
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('post-script')
+<?php $__env->startSection('post-script'); ?>
 	<script type="text/javascript">
 		$('#btnNewItem').click(function(){
 			var row = $('table tbody > tr:last'),
@@ -91,4 +93,5 @@
 			$('#total').html(total);
 		}
 	</script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
