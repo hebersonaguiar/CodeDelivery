@@ -34,12 +34,17 @@
 			<div class="collapse navbar-collapse" id="navbar">
 				<ul class="nav navbar-nav">
 					<li><a href="<?php echo e(url('/')); ?>">Home</a></li>
-					<li><a href="<?php echo e(route('admin.categories.index')); ?>">Categorias</a></li>
-					<li><a href="<?php echo e(route('admin.products.index')); ?>">Produtos</a></li>
-					<li><a href="<?php echo e(route('admin.clients.index')); ?>">Clientes</a></li>
-
-					<li><a href="<?php echo e(route('admin.cupoms.index')); ?>">Cupons</a></li>
-					<li><a href="<?php echo e(route('admin.orders.index')); ?>">Pedidos</a></li>
+						<?php if(Auth::user()): ?>
+							<?php if(Auth::user()->role == "admin"): ?>
+								<li><a href="<?php echo e(route('admin.categories.index')); ?>">Categorias</a></li>
+								<li><a href="<?php echo e(route('admin.products.index')); ?>">Produtos</a></li>
+								<li><a href="<?php echo e(route('admin.clients.index')); ?>">Clientes</a></li>
+								<li><a href="<?php echo e(route('admin.cupoms.index')); ?>">Cupons</a></li>
+								<li><a href="<?php echo e(route('admin.orders.index')); ?>">Pedidos</a></li>
+							<?php elseif(Auth::user()->role == "client"): ?>
+								<li><a href="<?php echo e(route('customer.order.index')); ?>">Meus Pedidos</a></li>
+							<?php endif; ?>
+						<?php endif; ?>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
