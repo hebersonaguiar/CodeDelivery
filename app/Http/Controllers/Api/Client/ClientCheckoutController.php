@@ -9,6 +9,7 @@ use CodeDelivery\Services\OrderService;
 use CodeDelivery\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 
 use CodeDelivery\Http\Requests\AdminCategoryRequest;
 use CodeDelivery\Http\Controllers\Controller;
@@ -31,27 +32,35 @@ class ClientCheckoutController extends Controller
 
     public function index()
     {
-    	$clientId = $this->userRepository->find(Auth::user()->id)->client->id;
-        $orders = $this->repository->scopeQuery(function($query) use($clientId) {
+        $id = Authorizer::getResourceOwnerId();
+    	$clientId = $this->userRepository->find($id)->client->id;
+        $orders = $this->repository->with(['items'])->scopeQuery(function($query) use($clientId) {
             return $query->where('client_id','=',$clientId);
         })->paginate();
 
-    	return view('customer.order.index', compact('orders'));
+    	return $orders;
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
+        $id = Authorizer::getResourceOwnerId();
         $data = $request->all();
-        $clientId = $this->userRepository->find(Auth::user()->id)->client->id;
+        $clientId = $this->userRepository->find($id)->client->id;
         $data['client_id'] = $clientId;
-        $this->service->create($data);
+        $obj = $this->service->create($data);
+        $order = $this->repository->with('items')->find($obj->id);
 
-        return redirect()->route('customer.order.index'); 
+        return $order; 
     }
 
 
     public function show($id)
     {
-        return ['minha order'];
+        $order = $this->repository->with(['client','items','cupom'])->find($id);
+        $order->items->each(function($item){
+            $item->product;
+        });
+        return $order;
     }
 
 
