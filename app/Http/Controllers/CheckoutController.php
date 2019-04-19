@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 use CodeDelivery\Http\Requests\AdminCategoryRequest;
+use CodeDelivery\Http\Requests\CheckoutRequest;
 use CodeDelivery\Http\Controllers\Controller;
 
 class CheckoutController extends Controller
@@ -39,7 +40,7 @@ class CheckoutController extends Controller
     	return view('customer.order.index', compact('orders'));
     }
 
-    public function store(Request $request){
+    public function store(CheckoutRequest $request){
         $data = $request->all();
         $clientId = $this->userRepository->find(Auth::user()->id)->client->id;
         $data['client_id'] = $clientId;

@@ -72,6 +72,7 @@ class ComposerStaticInit4871a205dca3a1e667839fdf6229ec85
         array (
             'LucaDegasperi\\OAuth2Server\\' => 27,
             'League\\OAuth2\\Server\\' => 21,
+            'League\\Fractal\\' => 15,
             'League\\Flysystem\\' => 17,
             'League\\Event\\' => 13,
         ),
@@ -226,6 +227,10 @@ class ComposerStaticInit4871a205dca3a1e667839fdf6229ec85
         'League\\OAuth2\\Server\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/oauth2-server/src',
+        ),
+        'League\\Fractal\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/league/fractal/src',
         ),
         'League\\Flysystem\\' => 
         array (

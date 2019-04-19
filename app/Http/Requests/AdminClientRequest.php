@@ -24,7 +24,7 @@ class AdminClientRequest extends Request
     public function rules()
     {
         return [
-            'address' => 'required'
+            // 'address' => 'required'
         ];
     }
 }
